@@ -1,0 +1,32 @@
+* pyserial_plot
+  This project is implementation of Eli Bendersky's [[https://eli.thegreenplace.net/2009/08/07/a-live-data-monitor-with-python-pyqt-and-pyserial][pyserial live data
+  monitor]] with python 3 for Linux.
+** Dependencies
+   - [[https://github.com/pyserial/pyserial][pyserial]]
+   - python 3 [[https://github.com/PierreRaybaut/PythonQwt][qwt]] (new version with pure python implementation)
+** Linux virtual serial port
+   - install [[https://linux.die.net/man/1/socat][socat]]
+     #+begin_src sh
+     sudo apt install socat
+     #+end_src
+     For this project socat used for estalishing two virtual serial
+     port: ~writer~ and ~reader~
+   - start virtual ports
+     #+begin_src sh
+     socat -d -d pty,raw,echo=0 pty,raw,echo=0
+     #+end_src
+     It will will start two virtual ports: in my case
+     - ~/dev/pts/2~ :: for writing serial(Hardcode into sender_sim.py)
+     - ~/dev/pts/4~ :: for reading serial(Enter from GUI)
+** Start project
+   After starting virtual serial ports
+   - run from new terminal
+     #+begin_src sh
+     python3 sender_sim.py
+     #+end_src
+   - strat from another terminal GUI applicatoin
+     #+begin_src sh
+     python3 plotting_data_monitor.py
+     #+end_src
+
+[[https://eli.thegreenplace.net/tag/serial-port][Read more about serial communication.]]     
